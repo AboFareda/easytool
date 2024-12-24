@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karim Tool</title>
+    <link rel="icon" href="https://bss.te.eg:12900/oc/bes/sm/login/resource.root/bes/sm/login/img/login_banner_ctz.jpg" type="image/jpg">
+
+    
+    <style>
+
+body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: #fff; /* توفير تباين مع النص */
+        position: relative;
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* الظل الداكن */
+        z-index: -1; /* إرسال الطبقة للخلف */
+    }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown button {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            color: #333;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .main-content {
+            margin: 50px 0;
+        }
+        .main-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .main-content .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .main-content .links a {
+            text-decoration: none;
+            color: #fff;
+            background-color: purple;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .main-content .links a:hover {
+            background-color: darkviolet;
+        }
+        .services-section {
+            margin: 40px auto;
+            width: 80%;
+            text-align: left;
+        }
+        .services-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .services-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            width: 80%;
+        }
+        .image-grid .box {
+            background-color: #f4f4f4;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .image-grid .box img {
+            width: 100%;
+            height: 115px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .image-grid .box a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: purple;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .image-grid .box a:hover {
+            background-color: darkviolet;
+        }
+        .contact-section {
+            margin: 40px auto;
+            text-align: center;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .contact-item i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            font-size: 12px;
+            color: white;
+        }
+        .social-icons a:hover {
+            background-color: #333;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+        footer a {
+            color: lightblue;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: deepskyblue;
+        }
+
+        /* شيت السنترالات */
+        .iframe-container {
+            width: 1200px; /* عرض المربع */
+            height: 700px; /* ارتفاع المربع */
+            border: 2px solid #ccc; /* إطار حول المربع */
+            border-radius: 10px; /* زوايا مستديرة */
+            overflow: hidden; /* إخفاء الأجزاء الخارجة عن المربع */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل للمربع */
+            margin: 20px auto; /* تمركز المربع في الصفحة */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+		 /* شيت السنترالات */
+            
+		 /*Sticky note*/
+      .sticky-container {
+          position: absolute;
+          top: 50px;
+          left: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+
+      .controls {
+          display: flex;
+          gap: 5px;
+          position: absolute;
+          top: -40px;
+          left: 0;
+      }
+
+      .resize-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #2196f3;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .resize-button:hover {
+          background-color: #1976d2;
+      }
+
+      .sticky-note {
+          width: 300px;
+          height: 160px;
+          background-color: #ffeb3b;
+          box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+          padding: 20px;
+          border-radius: 8px;
+          font-size: 16px;
+          line-height: 1.5;
+          overflow: hidden;
+          cursor: grab;
+          z-index: 9999;
+          transition: transform 0.05s linear, width 0.3s ease, height 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+      }
+
+      .sticky-note:active {
+          cursor: grabbing;
+      }
+
+      .sticky-note[contenteditable]:focus {
+          outline: 2px dashed #ff9800;
+          background-color: #fff9c4;
+      }
+
+      .save-button {
+          padding: 8px 16px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+          align-self: flex-end;
+      }
+
+      .save-button:hover {
+          background-color: #45a049;
+      }
+
+      .control-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #f44336;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .control-button:hover {
+          background-color: #d32f2f;
+      }
+
+      .add-button {
+          background-color: #4caf50;
+      }
+
+      .add-button:hover {
+          background-color: #388e3c;
+      }
+
+      .close-button {
+          background-color: #f44336;
+      }
+
+      .close-button:hover {
+          background-color: #d32f2f;
+      }
+
+      .sticky-container {
+          position: absolute;
+          top: 240px;
+          left: 100px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+
+      .controls {
+          display: flex;
+          gap: 5px;
+          position: absolute;
+          top: -40px;
+          left: 0;
+      }
+
+      .resize-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #2196f3;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .resize-button:hover {
+          background-color: #1976d2;
+      }
+
+      .sticky-note {
+          width: 250px;
+          height: 100px;
+          background-color: #ffeb3b;
+          box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+          padding: 20px;
+          border-radius: 8px;
+          font-size: 16px;
+          line-height: 1.5;
+          overflow: hidden;
+          cursor: grab;
+          z-index: 9999;
+          transition: transform 0.05s linear, width 0.3s ease, height 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          color: black;
+      }
+
+      .sticky-note:active {
+          cursor: grabbing;
+      }
+
+      .sticky-note[contenteditable]:focus {
+          outline: 2px dashed #ff9800;
+          background-color: #fff9c4;
+      }
+
+      .save-button {
+          padding: 8px 16px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+          align-self: flex-end;
+      }
+
+      .save-button:hover {
+          background-color: #45a049;
+      }
+
+      .control-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #f44336;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .control-button:hover {
+          background-color: #d32f2f;
+      }
+
+      .add-button {
+          background-color: #4caf50;
+      }
+
+      .add-button:hover {
+          background-color: #388e3c;
+      }
+
+      .close-button {
+          background-color: #f44336;
+      }
+
+      .close-button:hover {
+          background-color: #d32f2f;
+      }
+		/* Sticky Note end*/
+      </style>
+     <!-- canneds -->
+     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropdown = document.getElementById("dropdown");
+            const textBox = document.getElementById("textBox");
+
+            // Load options from localStorage
+            const options = JSON.parse(localStorage.getItem("dropdownOptions")) || {};
+            for (const [key, value] of Object.entries(options)) {
+                const option = document.createElement("option");
+                option.value = key;
+                option.textContent = key;
+                dropdown.appendChild(option);
+            }
+
+            // Display text when an option is selected
+            dropdown.addEventListener("change", () => {
+                textBox.value = options[dropdown.value] || "";
+            });
+        });
+    </script>
+    <!-- canned CSS -->
+        <style>
+            /* تنسيق الحاوية */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* العنوان */
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #555;
+}
+
+/* تنسيق القائمة المنسدلة */
+#dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f7f7f7;
+    box-sizing: border-box;
+}
+
+/* تنسيق مربع النص */
+#textBox {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f7f7f7;
+    box-sizing: border-box;
+    resize: none;
+    min-height: 120px;
+}
+
+/* تأثير hover على القائمة المنسدلة */
+#dropdown:hover {
+    border-color: #888;
+}
+
+/* تأثير hover على مربع النص */
+#textBox:hover {
+    border-color: #888;
+}
+
+/* تحسين مظهر العناصر للأجهزة الصغيرة */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+}
+        </style>
+    <!-- canned CSS -->
+     <!-- canneds -->
+      </head>
+    <body>
+<header>
+  <div class="logo"><a style="color: white; text-decoration: none;"
+  href="index.html">Karim Tool</a></div>
+    <nav>
+        <div class="dropdown">
+            <button>TOOL1</button>
+            <div class="dropdown-content">
+                <a target="_blank" href="https://10.19.44.2/ireport/new_ds_sm/ds_sm_feedback_list.php">IR Feedback</a>
+                <a target="_blank" href="https://10.19.44.2/ireport/new_ds_sm/ds_sm_feedback_list.php?a=return">DS-IR</a>
+                <a target="_blank" href="https://space-prod3.sprinklr.com/app/home">Sprinklr</a>
+                <a target="_blank" href="https://socialmedia.te.eg/Account/Login?ReturnUrl=%2FAgent">Portal</a>
+                <a target="_blank" href="https://socialmedia.te.eg/Home/ContactUsInternalFollowup">Portal FUB</a>
+                <a target="_blank" href="https://bss.te.eg:12900/oc/bes/sm/login/login-egypt.html">BSS</a>
+                <a target="_blank" href="https://10.190.250.118/Authentication/Login?redirect=%2FHome%2FIndex">360</a>
+                <a target="_blank" href="http://tts/">TTS</a>
+                <a target="_blank" href="https://10.42.187.100:8080/expresse/login-page?sessionExpired=true">DZS Cloud</a>
+                <a target="_blank" href="https://fcc.te.eg/TroubleTicket/faces/security/pages/Login.jsf;jsessionid=2vdIbZUkuKKvJb56BwHr0bX0udDwO9-z8rvxtYovQDMxLfL3LY03!-1799386342!NONE">ADF</a>
+                <a target="_blank" href="https://support.te.eg/portal/default/self-service/#/offering/1704">IBM</a>
+                <a target="_blank" href="https://oss.te.eg/om/jsp/public/home.jsp">OM Tool</a>
+                <a target="_blank" href="https://wiki/SiteAssets/branches/branches.html">Branchs</a>
+                <a target="_blank" href="http://10.19.5.17:90/Query/TelBillSerRechargeQuery.aspx">OSS</a>
+                <a target="_blank" href="http://matrix/">Matrix</a>
+                <a target="_blank" href="http://ematrix/">EMatrix</a>
+                <a target="_blank" href="https://10.19.44.2/ireport/cases/login.php">Ireport/Cases</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button >TOOL 2</button>
+            <div class="dropdown-content">
+                <a target="_blank" href="#">FTTH-UNMS 1</a>
+                <a target="_blank" href="#">FTTH-Trouble ticket</a>
+                <a target="_blank" href="#">Voice MTS</a>
+                <a target="_blank" href="#">Voice CST Profile</a>
+                <a target="_blank" href="https://ticketing.dsquares.com/en/support/login">WE Bonus-Dsquares</a>
+                <a target="_blank" href="https://adfs.te.eg/adfs/portal/updatepassword">Change Pass</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button >Gaming</button>
+            <div class="dropdown-content">
+                <a target="_blank" href="https://10.19.44.2/ireport/cases/gaming_q_list.php">Create Gaming IR</a>
+		<a target="_blank" href="https://wiki/SiteAssets/ADSL-New-Process/index.php/start/digital_scenario/117e.html?GmBo1628358723883">Gaming Ticket Maker </a>
+		<a target="_blank" href="https://10.19.44.2/ireport/cases/gaming_q_leaders_list.php?qs=~issue_type~equals&f=(status~equals~Open)(my_group~equals~Email%20Team)(my_group~equals~Social%20Media%20Team)">Gaming Open IR</a>
+		<a target="_blank" href="https://10.19.44.2/ireport/cases/gaming_q_leaders_list.php?qs=~issue_type~equals&f=(status~equals~In%20Progress)(my_group~equals~Email%20Team)(my_group~equals~Social%20Media%20Team)">Gaming In Progress IR</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="https://teleopti.te.eg/TeleoptiWFM/Web/MyTime" 
+            target="_blank"
+	    style="color: #ffffff; text-decoration: none;">Teleopti</a>
+        </div>
+    </nav>
+</header>
+
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const optionKeyInput = document.getElementById("optionKey");
+        const optionValueInput = document.getElementById("optionValue");
+        const addBtn = document.getElementById("addOption");
+        const deleteBtn = document.getElementById("deleteOption");
+        const deleteDropdown = document.getElementById("deleteDropdown");
+        const message = document.getElementById("message");
+
+        const loadOptions = () => {
+            const options = JSON.parse(localStorage.getItem("dropdownOptions")) || {};
+            const list = document.getElementById("optionsList");
+            deleteDropdown.innerHTML = "<option value=\"\" disabled selected>Select option to delete</option>";
+            list.innerHTML = "";
+            for (const [key, value] of Object.entries(options)) {
+                const item = document.createElement("li");
+                item.textContent = `${key}: ${value}`;
+                list.appendChild(item);
+
+                const dropdownOption = document.createElement("option");
+                dropdownOption.value = key;
+                dropdownOption.textContent = key;
+                deleteDropdown.appendChild(dropdownOption);
+            }
+        };
+
+        addBtn.addEventListener("click", () => {
+            const key = optionKeyInput.value.trim();
+            const value = optionValueInput.value.trim();
+            if (!key || !value) {
+                message.textContent = "Both fields are required.";
+                message.style.color = "red";
+                return;
+            }
+            const options = JSON.parse(localStorage.getItem("dropdownOptions")) || {};
+            options[key] = value;
+            localStorage.setItem("dropdownOptions", JSON.stringify(options));
+            optionKeyInput.value = "";
+            optionValueInput.value = "";
+            message.textContent = "Option added successfully!";
+            message.style.color = "green";
+            loadOptions();
+        });
+
+        deleteBtn.addEventListener("click", () => {
+            const key = deleteDropdown.value;
+            if (!key) {
+                message.textContent = "Select an option to delete.";
+                message.style.color = "red";
+                return;
+            }
+            const options = JSON.parse(localStorage.getItem("dropdownOptions")) || {};
+            if (options[key]) {
+                delete options[key];
+                localStorage.setItem("dropdownOptions", JSON.stringify(options));
+                message.textContent = "Option deleted successfully!";
+                message.style.color = "green";
+            } else {
+                message.textContent = "Key not found.";
+                message.style.color = "red";
+            }
+            loadOptions();
+        });
+
+        loadOptions();
+    });
+</script>
+</head>
+<body>
+    <br><br><br><br><br><br><br><br><br><br>
+<h1 style="color: #ccc;">Manage Dropdown Options</h1>
+<label for="optionKey">Option Key:</label>
+<input type="text" id="optionKey">
+<br><br>
+<label for="optionValue">Option Value:</label>
+<input type="text" id="optionValue">
+<br><br>
+<button id="addOption">Add Option</button>
+<br><br>
+<label for="deleteDropdown">Select Option to Delete:</label>
+<select id="deleteDropdown">
+    <option value="" disabled selected>Select option to delete</option>
+</select>
+<button id="deleteOption">Delete Option</button>
+<br><br>
+<p id="message"></p>
+<h2>Existing Options:</h2>
+<ul id="optionsList"></ul>
+<br><br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+<footer>
+    2025 All Rights Reserved. Design by <a href="https://wa.me/201229253356" target="_blank">Eng.Karim Sayed</a>
+</footer>
+
+<!-- Add this in the head for Font Awesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</body>
+</html>
