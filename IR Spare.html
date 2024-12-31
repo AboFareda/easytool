@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy IR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            color: #000;
+            direction: rtl;
+            text-align: right;
+        }
+        header, footer {
+            background-color: #00acc1;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 80%;
+        }
+        .stopwatch {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+        .stopwatch span {
+            margin-left: 10px;
+        }
+        .stopwatch button {
+            margin-left: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 50%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 100px;
+        }
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #00acc1;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Easy IR
+    </header>
+    <div class="container">
+        <div class="stopwatch">
+            <span>Timer:</span>
+            <span id="timer">00:00:00</span>
+            <button id="start">Start</button>
+        </div>
+        <div class="form-group">
+            <label for="channel">Channel</label>
+            <select id="channel">
+                <option value="">Please Select</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Twitter">Twitter</option>
+                <option value="Linkedin">Linkedin</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Messenger">Messenger</option>
+                <option value="Email">Email</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="product">Product</label>
+            <select id="product">
+                <option value="">Please Select</option>
+                <option value="ADSL">ADSL</option>
+                <option value="FTTH">FTTH</option>
+                <option value="Voice Only">Voice Only</option>
+                <option value="GSM">GSM</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" onchange="handleCategoryChange()">
+                <option value="">Please Select</option>
+                <option value="Problem">Problem</option>
+                <option value="Inquiry">Inquiry</option>
+            </select>
+        </div>
+        <div id="problemFields" style="display: none;">
+            <div class="form-group">
+                <label for="problemType">Problem Type</label>
+                <input type="text" id="problemType">
+            </div>
+            <div class="checkbox-group">
+                <label><input type="checkbox" id="solved"> Solved</label>
+                <label><input type="checkbox" id="escalated"> Escalated</label>
+                <label><input type="checkbox" id="handled"> Handled</label>
+            </div>
+        </div>
+        <div id="inquiryFields" style="display: none;">
+            <div class="form-group">
+                <label for="inquiryType">Inquiry Type</label>
+                <input type="text" id="inquiryType">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="profileName">Profile Name</label>
+            <input type="text" id="profileName">
+        </div>
+        <div class="form-group">
+            <label for="cstName">CST Name</label>
+            <input type="text" id="cstName">
+        </div>
+        <div class="form-group">
+            <label for="serviceNumber">Service Number</label>
+            <input type="text" id="serviceNumber">
+        </div>
+        <div class="form-group">
+            <label for="mobileNumber">Mobile Number</label>
+            <input type="text" id="mobileNumber">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="profileLink">Profile Link</label>
+            <input type="text" id="profileLink">
+        </div>
+        <div class="form-group">
+            <label for="dateTime">Date & Time</label>
+            <input type="text" id="dateTime">
+            <button onclick="setDateTime()">Set Date & Time</button>
+        </div>
+        <button onclick="saveData()">Save</button>
+        <button onclick="exportData()">Export</button>
+    </div>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Channel</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Problem Type</th>
+                <th>Problem Status</th>
+                <th>Inquiry Type</th>
+                <th>Profile Name</th>
+                <th>CST Name</th>
+                <th>Service Number</th>
+                <th>Mobile Number</th>
+                <th>Description</th>
+                <th>Profile Link</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <footer>
+        Created by ENG.Karim Sayed Ibrahim
+    </footer>
+    <script>
+        let timerInterval;
+        let timer = document.getElementById('timer');
+        let startButton = document.getElementById('start');
+
+        startButton.addEventListener('click', function() {
+            startTimer();
+        });
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            let startTime = Date.now();
+            timerInterval = setInterval(function() {
+                let elapsedTime = Date.now() - startTime;
+                let hours = Math.floor(elapsedTime / 3600000);
+                let minutes = Math.floor((elapsedTime % 3600000) / 60000);
+                let seconds = Math.floor((elapsedTime % 60000) / 1000);
+                timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function handleCategoryChange() {
+            let category = document.getElementById('category').value;
+            document.getElementById('problemFields').style.display = category === 'Problem' ? 'block' : 'none';
+            document.getElementById('inquiryFields').style.display = category === 'Inquiry' ? 'block' : 'none';
+        }
+
+        function setDateTime() {
+            let now = new Date();
+            let dateTime = now.toLocaleString();
+            document.getElementById('dateTime').value = dateTime;
+        }
+
+        function saveData() {
+            let channel = document.getElementById('channel').value;
+            let product = document.getElementById('product').value;
+            let category = document.getElementById('category').value;
+            let problemType = document.getElementById('problemType').value;
+            let problemStatus = [];
+            if (document.getElementById('solved').checked) problemStatus.push('Solved');
+            if (document.getElementById('escalated').checked) problemStatus.push('Escalated');
+            if (document.getElementById('handled').checked) problemStatus.push('Handled');
+            let inquiryType = document.getElementById('inquiryType').value;
+            let profileName = document.getElementById('profileName').value;
+            let cstName = document.getElementById('cstName').value;
+            let serviceNumber = document.getElementById('serviceNumber').value;
+            let mobileNumber = document.getElementById('mobileNumber').value;
+            let description = document.getElementById('description').value;
+                        let profileLink = document.getElementById('profileLink').value;
+            let dateTime = document.getElementById('dateTime').value;
+
+            if (!channel || !product || !category || !profileName || !cstName || !serviceNumber || !mobileNumber || !description || !profileLink || !dateTime) {
+                alert('من فضلك أكمل جميع الحقول');
+                return;
+            }
+
+            let table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            newRow.insertCell(0).textContent = channel;
+            newRow.insertCell(1).textContent = product;
+            newRow.insertCell(2).textContent = category;
+            newRow.insertCell(3).textContent = problemType;
+            newRow.insertCell(4).textContent = problemStatus.join(', ');
+            newRow.insertCell(5).textContent = inquiryType;
+            newRow.insertCell(6).textContent = profileName;
+            newRow.insertCell(7).textContent = cstName;
+            newRow.insertCell(8).textContent = serviceNumber;
+            newRow.insertCell(9).textContent = mobileNumber;
+            newRow.insertCell(10).textContent = description;
+            newRow.insertCell(11).textContent = profileLink;
+            newRow.insertCell(12).textContent = dateTime;
+
+            // Clear the form fields
+            document.getElementById('channel').value = '';
+            document.getElementById('product').value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('problemType').value = '';
+            document.getElementById('solved').checked = false;
+            document.getElementById('escalated').checked = false;
+            document.getElementById('handled').checked = false;
+            document.getElementById('inquiryType').value = '';
+            document.getElementById('profileName').value = '';
+            document.getElementById('cstName').value = '';
+            document.getElementById('serviceNumber').value = '';
+            document.getElementById('mobileNumber').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('profileLink').value = '';
+            document.getElementById('dateTime').value = '';
+
+            // Restart the timer
+            startTimer();
+        }
+
+        function exportData() {
+            let table = document.getElementById('dataTable');
+            let rows = table.getElementsByTagName('tr');
+            if (rows.length <= 1) {
+                alert('لا يوجد بيانات بالجدول، من فضلك ادخل البيانات أولا');
+                return;
+            }
+
+            let csvContent = '';
+            for (let row of rows) {
+                let cells = row.getElementsByTagName('td');
+                let rowContent = [];
+                for (let cell of cells) {
+                    rowContent.push(cell.textContent);
+                }
+                csvContent += rowContent.join(',') + '\n';
+            }
+
+            let now = new Date();
+            let dateTime = now.toLocaleString().replace(/[\s:]/g, '_');
+            let fileName = `Easy_IR_sheet_${dateTime}.csv`;
+
+            let blob = new Blob([csvContent], { type: 'text/csv' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        window.addEventListener('beforeunload', function (e) {
+            let table = document.getElementById('dataTable');
+            let rows = table.getElementsByTagName('tr');
+            let formFields = [
+                document.getElementById('channel').value,
+                document.getElementById('product').value,
+                document.getElementById('category').value,
+                document.getElementById('profileName').value,
+                document.getElementById('cstName').value,
+                document.getElementById('serviceNumber').value,
+                document.getElementById('mobileNumber').value,
+                document.getElementById('description').value,
+                document.getElementById('profileLink').value,
+                document.getElementById('dateTime').value
+            ];
+
+            if (rows.length > 1 || formFields.some(field => field !== '')) {
+                let confirmationMessage = 'هناك بيانات لم تحفظ أو تصدر في ملف إكسيل. هل تريد المتابعة؟';
+                e.returnValue = confirmationMessage;
+                return confirmationMessage;
+            }
+        });
+    </script>
+</body>
+</html>
