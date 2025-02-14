@@ -336,15 +336,119 @@ body {
             <img src="https://te.eg/wps/wcm/connect/abbcb7be-56f5-42e6-a6dc-5eed2ec6662d/Promotion-Page1252-W-x-322-h.jpg?MOD=AJPERES&CACHEID=abbcb7be-56f5-42e6-a6dc-5eed2ec6662d" alt="Placeholder">
             <a target="_blank" href="https://setuprouter.com/" target="_blank">CPE out of WIKI</a>
         </div>
-    </div>
-		            <div class="box">
+
+	            <div class="box">
             <img src="wiki cpe new.jpg">
             <a target="_blank" href="https://wiki/Pages/Forms/AllItems.aspx?RootFolder=%2FPages%2FTechnical%5FDSL%2Flast%20edit%20Revamp%2FVDSL%20Routers" target="_blank">WIKI CPE Last Version</a>
         </div>
 
+
+	    
+    </div>
 </div>
 
 
+
+<!-- Sticky Note-->
+<div class="sticky-container" id="sticky-container">
+    <div class="controls">
+        <button class="control-button close-button">X</button>
+        <button class="resize-button smaller-button">-</button>
+        <button class="resize-button larger-button">+</button>
+        <button class="control-button add-button">N</button>
+    </div>
+    <div class="sticky-note">
+        <div contenteditable="true" style="flex-grow: 1; overflow: auto;">
+            Drag me around! Click here to edit this sticky note.
+        </div>
+        <button class="save-button">SAVE</button>
+    </div>
+</div>
+
+<script>
+    function initializeSticky(container) {
+        const controls = container.querySelector('.controls');
+        const stickyNote = container.querySelector('.sticky-note');
+        const saveButton = container.querySelector('.save-button');
+        const smallerButton = container.querySelector('.smaller-button');
+        const largerButton = container.querySelector('.larger-button');
+        const closeButton = container.querySelector('.close-button');
+        const addButton = container.querySelector('.add-button');
+
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        // Dragging functionality
+        container.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'BUTTON') return; // Prevent drag when clicking the buttons
+            isDragging = true;
+            offsetX = e.clientX - container.offsetLeft;
+            offsetY = e.clientY - container.offsetTop;
+            container.style.transition = 'none'; // Disable transition during drag
+            stickyNote.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                container.style.left = `${e.clientX - offsetX}px`;
+                container.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            stickyNote.style.cursor = 'grab';
+        });
+
+        // Save as TXT functionality
+        saveButton.addEventListener('click', () => {
+            const noteContent = stickyNote.querySelector('[contenteditable]').textContent;
+            const blob = new Blob([noteContent], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'sticky-note.txt';
+            link.click();
+        });
+
+        // Resize functionality
+        smallerButton.addEventListener('click', () => {
+         const currentWidth = stickyNote.offsetWidth;
+         const currentHeight = stickyNote.offsetHeight;
+         if (currentWidth > 150 && currentHeight > 150) { // Set minimum size
+             stickyNote.style.width = `${currentWidth - 85}px`;
+             stickyNote.style.height = `${currentHeight - 100}px`;
+         }
+     });
+
+     largerButton.addEventListener('click', () => {
+         const currentWidth = stickyNote.offsetWidth;
+         const currentHeight = stickyNote.offsetHeight;
+         if (currentWidth < 600 && currentHeight < 600) { // Set maximum size
+             stickyNote.style.width = `${currentWidth + 15}px`;
+             stickyNote.style.height = `${currentHeight + 100}px`;
+         }
+     });
+
+        // Close sticky note functionality
+        closeButton.addEventListener('click', () => {
+            container.remove();
+        });
+
+        // Add new sticky note functionality
+        addButton.addEventListener('click', () => {
+            const newSticky = container.cloneNode(true);
+            document.body.appendChild(newSticky);
+            newSticky.style.top = `${container.offsetTop + 20}px`;
+            newSticky.style.left = `${container.offsetLeft + 20}px`;
+            initializeSticky(newSticky);
+        });
+    }
+
+    // Initialize the first sticky note
+    initializeSticky(document.getElementById('sticky-container'));
+</script>
+
+    <!-- Sticky Note -->
 <div class="contact-section">
     <div class="contact-item">
         <i class="fa fa-phone"></i>
