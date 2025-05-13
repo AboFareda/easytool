@@ -218,7 +218,28 @@ body {
             width: 100vw; 
             height: 100vh; 
             border: none; 
+	display: none;
         }
+
+	.Iframebtn {
+	  text-decoration: none;
+            color: #fff;
+            background-color: purple;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+
+	}
+	.Iframe-a {
+	  text-decoration: none;
+            color: #fff;
+            background-color: purple;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+
+	}	
+
 
 
 		 /* شيت السنترالات */
@@ -777,6 +798,13 @@ h1 {
 
     // Initialize the first sticky note
     initializeSticky(document.getElementById('sticky-container'));
+
+ function changeIframe(url) {
+            var iframe = document.getElementById("myIframe");
+            iframe.src = url;
+            iframe.style.display = "block"; // إظهار الـ iframe عند الضغط على زر
+        }
+
 </script>
 
     <!-- Sticky Note -->
@@ -806,6 +834,11 @@ h1 {
         <a href="https://twitter.com/telecomegypt" target="_blank"><i class="fa fa-twitter"></i></a>
     </div>
 </div>
+  <button class="Iframebtn" onclick="changeIframe('https://elmasry635.github.io/Brother/Brothers.html')">Brothers-SR</button>
+   <a class="Iframe-a" href="https://wiki/SiteAssets/dev_assets/bss_tree_menu_v3.html" target="_blank" >WIKI-SR</a>
+<br><br>
+    <iframe id="myIframe"></iframe>
+<br><br>
 
 <footer>
     2025 All Rights Reserved. Design by <a href="https://wa.me/201229253356" target="_blank">Eng.Karim Sayed</a>
