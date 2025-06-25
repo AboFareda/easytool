@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dropdown from JSON</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      text-align: center;
+      padding: 50px;
+    }
 
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Select Option</h2>
+    <select id="dropdown">
+      <option disabled selected>Choose an option</option>
+    </select>
+    <textarea id="textBox" readonly></textarea>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dropdown = document.getElementById("dropdown");
+      const textBox = document.getElementById("textBox");
+
+      fetch("data.json")
+        .then(response => response.json())
+        .then(options => {
+          // Clear existing options
+          dropdown.innerHTML = `<option disabled selected>Choose an option</option>`;
+
+          // Populate dropdown
+          for (const key in options) {
+            const option = document.createElement("option");
+            option.value = key;
+            option.textContent = key;
+            dropdown.appendChild(option);
+          }
+
+          // Show text when selection changes
+          dropdown.addEventListener("change", () => {
+            textBox.value = options[dropdown.value] || "";
+          });
+        })
+        .catch(error => {
+          console.error("Error loading JSON file:", error);
+        });
+    });
+  </script>
+</body>
+</html>
