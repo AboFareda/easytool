@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karim Tool</title>
+    <link rel="icon" href="https://bss.te.eg:12900/oc/bes/sm/login/resource.root/bes/sm/login/img/login_banner_ctz.jpg" type="image/jpg">
+
+    
+    <style>
+
+body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: #fff; /* توفير تباين مع النص */
+        position: relative;
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* الظل الداكن */
+        z-index: -1; /* إرسال الطبقة للخلف */
+    }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown button {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            color: #333;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .main-content {
+            margin: 50px 0;
+        }
+        .main-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .main-content .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .main-content .links a {
+            text-decoration: none;
+            color: #fff;
+            background-color: purple;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .main-content .links a:hover {
+            background-color: darkviolet;
+        }
+        .services-section {
+            margin: 40px auto;
+            width: 80%;
+            text-align: left;
+        }
+        .services-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .services-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            width: 80%;
+        }
+        .image-grid .box {
+            background-color: #f4f4f4;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .image-grid .box img {
+            width: 100%;
+            height: 115px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .image-grid .box a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: purple;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .image-grid .box a:hover {
+            background-color: darkviolet;
+        }
+        .contact-section {
+            margin: 40px auto;
+            text-align: center;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .contact-item i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            font-size: 12px;
+            color: white;
+        }
+        .social-icons a:hover {
+            background-color: #333;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+        footer a {
+            color: lightblue;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: deepskyblue;
+        }
+
+        /* شيت السنترالات */
+       iframe {
+            width: 100vw; 
+            height: 100vh; 
+            border: none; 
+	display: none;
+        }
+
+	.Iframebtn {
+	  text-decoration: none;
+            color: #fff;
+            background-color: purple;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+
+	}
+	.Iframe-a {
+	  text-decoration: none;
+            color: #fff;
+            background-color: purple;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+
+	}	
+
+
+
+		 /* شيت السنترالات */
+            
+		 /*Sticky note*/
+      .sticky-container {
+          position: absolute;
+          top: 50px;
+          left: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+
+      .controls {
+          display: flex;
+          gap: 5px;
+          position: absolute;
+          top: -40px;
+          left: 0;
+      }
+
+      .resize-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #2196f3;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .resize-button:hover {
+          background-color: #1976d2;
+      }
+
+      .sticky-note {
+          width: 300px;
+          height: 160px;
+          background-color: #ffeb3b;
+          box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+          padding: 20px;
+          border-radius: 8px;
+          font-size: 16px;
+          line-height: 1.5;
+          overflow: hidden;
+          cursor: grab;
+          z-index: 9999;
+          transition: transform 0.05s linear, width 0.3s ease, height 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+      }
+
+      .sticky-note:active {
+          cursor: grabbing;
+      }
+
+      .sticky-note[contenteditable]:focus {
+          outline: 2px dashed #ff9800;
+          background-color: #fff9c4;
+      }
+
+      .save-button {
+          padding: 8px 16px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+          align-self: flex-end;
+      }
+
+      .save-button:hover {
+          background-color: #45a049;
+      }
+
+      .control-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #f44336;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .control-button:hover {
+          background-color: #d32f2f;
+      }
+
+      .add-button {
+          background-color: #4caf50;
+      }
+
+      .add-button:hover {
+          background-color: #388e3c;
+      }
+
+      .close-button {
+          background-color: #f44336;
+      }
+
+      .close-button:hover {
+          background-color: #d32f2f;
+      }
+
+      .sticky-container {
+          position: absolute;
+          top: 240px;
+          left: 100px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+
+      .controls {
+          display: flex;
+          gap: 5px;
+          position: absolute;
+          top: -40px;
+          left: 0;
+      }
+
+      .resize-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #2196f3;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .resize-button:hover {
+          background-color: #1976d2;
+      }
+
+      .sticky-note {
+          width: 250px;
+          height: 100px;
+          background-color: #ffeb3b;
+          box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+          padding: 20px;
+          border-radius: 8px;
+          font-size: 16px;
+          line-height: 1.5;
+          overflow: hidden;
+          cursor: grab;
+          z-index: 9999;
+          transition: transform 0.05s linear, width 0.3s ease, height 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          color: black;
+      }
+
+      .sticky-note:active {
+          cursor: grabbing;
+      }
+
+      .sticky-note[contenteditable]:focus {
+          outline: 2px dashed #ff9800;
+          background-color: #fff9c4;
+      }
+
+      .save-button {
+          padding: 8px 16px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+          align-self: flex-end;
+      }
+
+      .save-button:hover {
+          background-color: #45a049;
+      }
+
+      .control-button {
+          width: 30px;
+          height: 30px;
+          border: none;
+          border-radius: 50%;
+          background-color: #f44336;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .control-button:hover {
+          background-color: #d32f2f;
+      }
+
+      .add-button {
+          background-color: #4caf50;
+      }
+
+      .add-button:hover {
+          background-color: #388e3c;
+      }
+
+      .close-button {
+          background-color: #f44336;
+      }
+
+      .close-button:hover {
+          background-color: #d32f2f;
+      }
+		/* Sticky Note end*/
+        /* تول الكندات بداية*/
+
+   #browseBtn {
+            background-color: #4CAF50;
+            color: white;
+                        padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+
+        }
+        #copyBtn {
+            background-color: #2196F3;
+            color: white;
+                        padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+
+        }
+        #downloadBtn {
+            background-color: #ff9800;
+            color: white;
+                        padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+
+        }
+               select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+            .form-group {
+            margin-bottom: 5px;
+            width: 500PX;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+           .containerr {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            margin-left: 30%;
+
+        }
+        /*تول الكندات نهاية*/
+      </style>
+     <!-- canneds -->
+     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropdown = document.getElementById("dropdown");
+            const textBox = document.getElementById("textBox");
+
+            // Load options from localStorage
+            const options = JSON.parse(localStorage.getItem("dropdownOptions")) || {};
+            for (const [key, value] of Object.entries(options)) {
+                const option = document.createElement("option");
+                option.value = key;
+                option.textContent = key;
+                dropdown.appendChild(option);
+            }
+
+            // Display text when an option is selected
+            dropdown.addEventListener("change", () => {
+                textBox.value = options[dropdown.value] || "";
+            });
+        });
+    </script>
+     <!-- canneds -->
+      </head>
+    <body>
+<header>
+  <div class="logo"><a style="color: white; text-decoration: none;"
+  href="index">Easy Tool V 5.25</a></div>
+    <nav>
+        <div class="dropdown">
+            <button>Main-Tools</button>
+            <div class="dropdown-content">
+                <a target="_blank" href="https://10.19.44.2/ireport/new_ds_sm/ds_sm_feedback_list.php">IR Feedback</a>
+                <a target="_blank" href="https://10.19.44.2/ireport/new_ds_sm/ds_sm_feedback_list.php?a=return">DS-IR</a>
+                <a target="_blank" href="https://space-prod3.sprinklr.com/app/home">Sprinklr</a>
+                <a target="_blank" href="https://socialmedia.te.eg/Account/Login?ReturnUrl=%2FAgent">Portal</a>
+                <a target="_blank" href="https://socialmedia.te.eg/Home/ContactUsInternalFollowup">Portal FUB</a>
+                <a target="_blank" href="https://bss.te.eg:12900/oc/bes/sm/login/login-egypt.html">BSS</a>
+                <a target="_blank" href="https://customer360h.te.eg/Home/Index">360</a>
+                <a target="_blank" href="http://tts/">TTS</a>
+                <a target="_blank" href="https://10.42.187.100:8080/expresse/login-page?sessionExpired=true">DZS Cloud</a>
+                <a target="_blank" href="https://fcc.te.eg/TroubleTicket/faces/security/pages/Login.jsf;jsessionid=2vdIbZUkuKKvJb56BwHr0bX0udDwO9-z8rvxtYovQDMxLfL3LY03!-1799386342!NONE">ADF</a>
+                <a target="_blank" href="https://support.te.eg/portal/default/self-service/#/offering/1704">IBM</a>
+                <a target="_blank" href="https://oss.te.eg/om/jsp/public/home.jsp">OM Tool</a>
+                <a target="_blank" href="https://wiki/SiteAssets/branches/branches.html">Branchs</a>
+                <a target="_blank" href="http://10.19.5.17:90/Query/TelBillSerRechargeQuery.aspx">OSS</a>
+                <a target="_blank" href="http://matrix/">Matrix</a>
+                <a target="_blank" href="http://ematrix/">EMatrix</a>
+                <a target="_blank" href="https://10.19.44.2/ireport/cases/login.php">Ireport/Cases</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button >More </button>
+            <div class="dropdown-content">
+		<a target="_blank" href="https://10.99.105.177:8080/#/login">HDM</a>    
+                <a target="_blank" href="https://wiki/SiteAssets/ADSL-New-Process/index.html">TKT Maker </a>
+                <a target="_blank" href="#">FTTH-UNMS 1</a>
+                <a target="_blank" href="#">FTTH-Trouble ticket</a>
+                <a target="_blank" href="#">Voice MTS</a>
+                <a target="_blank" href="#">Voice CST Profile</a>
+                <a target="_blank" href="https://ticketing.dsquares.com/en/support/login">WE Bonus-Dsquares</a>
+                <a target="_blank" href="https://adfs.te.eg/adfs/portal/updatepassword">Change Pass</a>
+
+            </div>
+        </div>
+        <div class="dropdown">
+            <button >Gaming</button>
+            <div class="dropdown-content">
+                <a target="_blank" href="https://10.19.44.2/ireport/cases/gaming_q_list.php">Create Gaming IR</a>
+		<a target="_blank" href="https://wiki/SiteAssets/ADSL-New-Process/index.php/start/digital_scenario/117e.html?GmBo1628358723883">Gaming Ticket Maker </a>
+		<a target="_blank" href="https://10.19.44.2/ireport/cases/gaming_q_leaders_list.php?qs=~issue_type~equals&f=(status~equals~Open)(my_group~equals~Email%20Team)(my_group~equals~Social%20Media%20Team)">Gaming Open IR</a>
+		<a target="_blank" href="https://10.19.44.2/ireport/cases/gaming_q_leaders_list.php?qs=~issue_type~equals&f=(status~equals~In%20Progress)(my_group~equals~Email%20Team)(my_group~equals~Social%20Media%20Team)">Gaming In Progress IR</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="https://wiki/Pages/Technical_DSL/Escalation%20Matrix%20Sheet.aspx" 
+            target="_blank"
+	    style="color: #ffffff; text-decoration: none;">Escalation Matrex</a>
+        </div>
+	
+	<div class="dropdown">
+            <a href="https://teleopti.te.eg/TeleoptiWFM/Web/MyTime" 
+            target="_blank"
+	    style="color: #ffffff; text-decoration: none;">Teleopti</a>
+        </div>
+	         <div class="dropdown">
+            <a href="https://web.whatsapp.com/" 
+            target="_blank"
+	    style="color: #25D366; text-decoration: none;">Whatsapp</a>
+        </div>
+    </nav>
+</header>
+
+<div class="main-content">
+    <h2>ECARE TASK</h2>
+
+            <!-- بداية تول الكندات -->
+
+        <div class="containerr">
+        <h1>Your Canned's</h1>
+        <div class="form-group">
+            <label style="color: black;" for="nameSelect">كنداتك يا بيه 😎</label>
+            <select id="nameSelect">
+                <option value="">-- اختر من القائمة --</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label style="color: black;" for="valueInput">خدها كبى من الزووراار 🤩</label>
+            <input type="text" id="valueInput" readonly>
+        </div>
+        <div class="buttons">
+            <button id="browseBtn">Browse Canned</button>
+            <button id="copyBtn">Copy</button>
+            <button id="downloadBtn">Download Sheet</button>
+        </div>
+    </div>
+
+    <script>
+        // متغير لتخزين بيانات Excel
+        let excelData = [];
+        
+        // عناصر DOM
+        const nameSelect = document.getElementById('nameSelect');
+        const valueInput = document.getElementById('valueInput');
+        const browseBtn = document.getElementById('browseBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        // بيانات Excel المدمجة (بداية)
+        const embeddedExcelData = [
+            { name: "صبح", value: "صباح الخير" },
+            { name: "مساء", value: "مساء الخير" },
+            { name: "شكراً", value: "العفو" },
+            { name: "كيف حالك", value: "بخير والحمد لله" }
+        ];
+        
+        // تحميل البيانات المدمجة عند بدء التشغيل
+        window.addEventListener('DOMContentLoaded', function() {
+            excelData = embeddedExcelData;
+            updateDropdown(excelData);
+        });
+        
+        // حدث تغيير الاختيار في القائمة المنسدلة
+        nameSelect.addEventListener('change', function() {
+            const selectedName = this.value;
+            const selectedItem = excelData.find(item => item.name === selectedName);
+            if (selectedItem) {
+                valueInput.value = selectedItem.value || '';
+            } else {
+                valueInput.value = '';
+            }
+        });
+        
+        // حدث زر Browse Canned
+        browseBtn.addEventListener('click', function() {
+            // إنشاء عنصر input لاختيار الملف
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.xlsx, .xls, .csv';
+            
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                // هنا يجب معالجة ملف Excel
+                // سنستخدم مكتبة SheetJS (xlsx) لقراءة ملف Excel
+                
+                // تحميل مكتبة SheetJS ديناميكياً إذا لم تكن محملة
+                if (typeof XLSX === 'undefined') {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+                    script.onload = function() {
+                        processExcelFile(file);
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    processExcelFile(file);
+                }
+            });
+            
+            fileInput.click();
+        });
+        
+        // دالة لمعالجة ملف Excel
+        function processExcelFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                
+                // الحصول على أول ورقة عمل
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                
+                // تحويل الورقة إلى JSON
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+                
+                // تخزين البيانات
+                excelData = jsonData;
+                
+                // تحديث القائمة المنسدلة
+                updateDropdown(jsonData);
+            };
+            reader.readAsArrayBuffer(file);
+        }
+        
+        // دالة لتحديث القائمة المنسدلة
+        function updateDropdown(data) {
+            nameSelect.innerHTML = '<option value="">-- اختر من القائمة --</option>';
+            
+            data.forEach(item => {
+                if (item.name) {
+                    const option = document.createElement('option');
+                    option.value = item.name;
+                    option.textContent = item.name;
+                    nameSelect.appendChild(option);
+                }
+            });
+        }
+        
+        // حدث زر Copy
+        copyBtn.addEventListener('click', function() {
+            valueInput.select();
+            document.execCommand('copy');
+            alert('تم نسخ النص: ' + valueInput.value);
+        });
+        
+        // حدث زر Download Sheet - سيتم تنزيل ملف محدد مسبقاً
+        downloadBtn.addEventListener('click', function() {
+            // تحميل مكتبة SheetJS ديناميكياً إذا لم تكن محملة
+            if (typeof XLSX === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+                script.onload = downloadFixedExcelFile;
+                document.head.appendChild(script);
+            } else {
+                downloadFixedExcelFile();
+            }
+        });
+        
+        // دالة لتنزيل ملف Excel ثابت
+        function downloadFixedExcelFile() {
+            // بيانات ثابتة للملف الذي سيتم تنزيله
+            const fixedData = [
+                { name: "مثال1", value: "قيمة مثال1" },
+                { name: "مثال2", value: "قيمة مثال2" },
+                { name: "مثال3", value: "قيمة مثال3" }
+            ];
+            
+            // إنشاء ورقة عمل جديدة
+            const ws = XLSX.utils.json_to_sheet(fixedData);
+            
+            // إنشاء مصنف جديد
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "البيانات");
+            
+            // تنزيل الملف باسم Data_Sheet.xlsx
+            XLSX.writeFile(wb, "Data_Sheet.xlsx");
+        }
+    </script>
+<!-- نهاية تول الكندات -->
+
+
+
+    <div class="services-section">
+        <h2>Services</h2>
+        <p>We work to solve customer problems and respond to their inquiries through social networking sites (Facebook, LinkedIn, YouTube, X, Instagram) to keep the company’s image impressive and with a good reputation.</p>
+    </div>
+    <div class="image-grid">
+        <div class="box">
+            <img src="https://te.eg/wps/wcm/connect/f66e1466-a9aa-415a-9d74-4cf0dc97d19f/Promotion-Page-1252-W-x-322-H-EN.png?MOD=AJPERES&CACHEID=f66e1466-a9aa-415a-9d74-4cf0dc97d19f" alt="Placeholder">
+            <a target="_blank" href="https://wiki/SiteAssets/wiki_homepage/sales_bss.html" target="_blank">WIKI Sales</a>
+        </div>
+        <div class="box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Openreach_Man_at_cabinet.jpg/800px-Openreach_Man_at_cabinet.jpg" alt="Placeholder">
+            <a href="https://wiki/SiteAssets/wiki_homepage/technical_dsl.html" target="_blank">WIKI Tech</a>
+        </div>
+        <div class="box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Barack_Obama_makes_a_telephone_call.jpg/800px-Barack_Obama_makes_a_telephone_call.jpg" alt="Placeholder">
+            <a target="_blank" href="https://wiki/SiteAssets/wiki_homepage/landline.html" target="_blank">WIKI Voice</a>
+        </div>
+        <div class="box">
+            <img src="https://te.eg/wps/wcm/connect/4a1704c3-eac8-44f0-afd9-18fa3d5f594c/ESIMHomepage-Banner---1700-x-651_EN-min.jpg?MOD=AJPERES&CACHEID=4a1704c3-eac8-44f0-afd9-18fa3d5f594c" alt="Placeholder">
+            <a target="_blank" href="https://wiki/SiteAssets/wiki_homepage/gsm.html" target="_blank">WIKI GSM</a>
+        </div>
+        <div class="box">
+            <img src="https://www.efb-elektronik.de/thumbnail/ba/be/3b/1705410989/Header__fttx_ftth-technik_gross_EFB-Elektronik_1920x1920.jpg" alt="Placeholder">
+            <a target="_blank" href="https://wiki/SiteAssets/wiki_homepage/ftth.html" target="_blank">WIKI FTTH</a>
+        </div>
+        <div class="box">
+            <img src="https://te.eg/wps/wcm/connect/abbcb7be-56f5-42e6-a6dc-5eed2ec6662d/Promotion-Page1252-W-x-322-h.jpg?MOD=AJPERES&CACHEID=abbcb7be-56f5-42e6-a6dc-5eed2ec6662d" alt="Placeholder">
+            <a target="_blank" href="https://setuprouter.com/" target="_blank">CPE out of WIKI</a>
+        </div>
+
+
+	            <div class="box">
+            <img src="wiki cpe new.jpg">
+            <a target="_blank" href="https://wiki/Pages/Forms/AllItems.aspx?RootFolder=%2FPages%2FTechnical%5FDSL%2Flast%20edit%20Revamp%2FVDSL%20Routers" target="_blank">WIKI CPE Last Version</a>
+        </div>
+	    
+	            <div class="box">
+            <img src="old cpe.jpg">
+            <a target="_blank" href="https://wiki/Pages/Forms/AllItems.aspx?RootFolder=%2fpages%2fkmp%20version%203%2frouters%20configuration%2fwe%20router%20configuration&FolderCTID=0x012000DC71EE1CCEFFC14BA42F9B2258BE6D72" target="_blank">WIKI CPE Old Version</a>
+        </div>
+
+      <div class="box">
+            <img src="avaya.jpg">
+            <a target="_blank" href="avaya.html" target="_blank">AVAYA Setup</a>
+        </div>
+	    
+    </div>
+</div>
+
+<br><br><br>
+<iframe src="https://elmasry635.github.io/Brother/Brothers.html"></iframe>
+<br><br>
+
+<!-- Sticky Note-->
+<div class="sticky-container" id="sticky-container">
+    <div class="controls">
+        <button class="control-button close-button">X</button>
+        <button class="resize-button smaller-button">-</button>
+        <button class="resize-button larger-button">+</button>
+        <button class="control-button add-button">N</button>
+    </div>
+    <div class="sticky-note">
+        <div contenteditable="true" style="flex-grow: 1; overflow: auto;">
+            اسحبني حولك! انقر هنا لتحرير هذه الملاحظة اللاصقة.
+        </div>
+        <button class="save-button">SAVE</button>
+    </div>
+</div>
+
+<script>
+    function initializeSticky(container) {
+        const controls = container.querySelector('.controls');
+        const stickyNote = container.querySelector('.sticky-note');
+        const saveButton = container.querySelector('.save-button');
+        const smallerButton = container.querySelector('.smaller-button');
+        const largerButton = container.querySelector('.larger-button');
+        const closeButton = container.querySelector('.close-button');
+        const addButton = container.querySelector('.add-button');
+
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        // Dragging functionality
+        container.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'BUTTON') return; // Prevent drag when clicking the buttons
+            isDragging = true;
+            offsetX = e.clientX - container.offsetLeft;
+            offsetY = e.clientY - container.offsetTop;
+            container.style.transition = 'none'; // Disable transition during drag
+            stickyNote.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                container.style.left = `${e.clientX - offsetX}px`;
+                container.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            stickyNote.style.cursor = 'grab';
+        });
+
+        // Save as TXT functionality
+        saveButton.addEventListener('click', () => {
+            const noteContent = stickyNote.querySelector('[contenteditable]').textContent;
+            const blob = new Blob([noteContent], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'sticky-note.txt';
+            link.click();
+        });
+
+        // Resize functionality
+        smallerButton.addEventListener('click', () => {
+         const currentWidth = stickyNote.offsetWidth;
+         const currentHeight = stickyNote.offsetHeight;
+         if (currentWidth > 150 && currentHeight > 150) { // Set minimum size
+             stickyNote.style.width = `${currentWidth - 85}px`;
+             stickyNote.style.height = `${currentHeight - 100}px`;
+         }
+     });
+
+     largerButton.addEventListener('click', () => {
+         const currentWidth = stickyNote.offsetWidth;
+         const currentHeight = stickyNote.offsetHeight;
+         if (currentWidth < 600 && currentHeight < 600) { // Set maximum size
+             stickyNote.style.width = `${currentWidth + 15}px`;
+             stickyNote.style.height = `${currentHeight + 100}px`;
+         }
+     });
+
+        // Close sticky note functionality
+        closeButton.addEventListener('click', () => {
+            container.remove();
+        });
+
+        // Add new sticky note functionality
+        addButton.addEventListener('click', () => {
+            const newSticky = container.cloneNode(true);
+            document.body.appendChild(newSticky);
+            newSticky.style.top = `${container.offsetTop + 20}px`;
+            newSticky.style.left = `${container.offsetLeft + 20}px`;
+            initializeSticky(newSticky);
+        });
+    }
+
+    // Initialize the first sticky note
+    initializeSticky(document.getElementById('sticky-container'));
+
+ function changeIframe(url) {
+            var iframe = document.getElementById("myIframe");
+            iframe.src = url;
+            iframe.style.display = "block"; // إظهار الـ iframe عند الضغط على زر
+        }
+
+</script>
+
+    <!-- Sticky Note -->
+
+
+
+
+
+
+
+
+
+<div class="contact-section">
+    <div class="contact-item">
+        <i class="fa fa-phone"></i>
+        <span>111, 19777, 01555000111</span>
+    </div>
+    <div class="contact-item">
+        <i class="fa fa-envelope"></i>
+        <span>customer.care@te.eg</span>
+    </div>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/telecom.egypt/" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.facebook.com/TelecomEgypt" target="_blank"><i class="fa fa-facebook"></i></a>
+        <a href="https://www.youtube.com/channel/UCLl_SOH0KD8-Hv1H1yetEyw" target="_blank"><i class="fa fa-youtube"></i></a>
+        <a href="https://www.linkedin.com/company/telecom-egypt/" target="_blank"><i class="fa fa-linkedin"></i></a>
+        <a href="https://twitter.com/telecomegypt" target="_blank"><i class="fa fa-twitter"></i></a>
+    </div>
+</div>
+  <button class="Iframebtn" onclick="changeIframe('https://elmasry635.github.io/Brother/Brothers.html')">Brothers-SR</button>
+   <a class="Iframe-a" href="https://wiki/SiteAssets/dev_assets/bss_tree_menu_v3.html" target="_blank" >WIKI-SR</a>
+<br><br>
+    <iframe id="myIframe"></iframe>
+<br><br>
+
+<footer>
+    2025 All Rights Reserved. Design by <a href="https://wa.me/201229253356" target="_blank">Eng.Karim Sayed</a>
+</footer>
+
+<!-- Add this in the head for Font Awesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+	    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/67884e503a842732606fa8f5/1ihm73qji';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
