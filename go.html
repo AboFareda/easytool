@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Public Passwords</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    table {
+      margin: auto;
+      border-collapse: collapse;
+      width: 80%;
+      background-color: #fff;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    td.tool-cell {
+      background-color: #e0f0ff;
+      font-weight: bold;
+    }
+    .copy-btn {
+      margin-left: 8px;
+      padding: 4px 8px;
+      font-size: 0.9em;
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    .copy-btn:hover {
+      background-color: #218838;
+    }
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 12px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-size: 16px;
+    }
+    #toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+    }
+  </style>
+</head>
+<body onload="checkPassword()">
+
+  <h1>Public Passwords</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>User Name</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tool-cell">ASSIA(DZS Cloud)</td>
+        <td>
+          <span id="user1">xceed_lob</span>
+          <button class="copy-btn" onclick="copyText('user1')">Copy</button>
+        </td>
+        <td>
+          <span id="pass1">Xceed@1234</span>
+          <button class="copy-btn" onclick="copyText('pass1')">Copy</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="tool-cell">TEST</td>
+        <td>
+          <span id="user2">karim</span>
+          <button class="copy-btn" onclick="copyText('user2')">Copy</button>
+        </td>
+        <td>
+          <span id="pass2">test</span>
+          <button class="copy-btn" onclick="copyText('pass2')">Copy</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="tool-cell">test2</td>
+        <td>
+          <span id="user3">test</span>
+          <button class="copy-btn" onclick="copyText('user3')">Copy</button>
+        </td>
+        <td>
+          <span id="pass3">test3</span>
+          <button class="copy-btn" onclick="copyText('pass3')">Copy</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="toast">Copied!</div>
+
+  <script>
+    function copyText(sourceId) {
+      const text = document.getElementById(sourceId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied: ${text}`);
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.innerText = message;
+      toast.className = "show";
+      setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+      }, 3000);
+    }
+
+  function checkPassword() {
+    // مصفوفة بكلمات المرور المقبولة
+    var validPasswords = ["213851", "213858", "296595","196477","207177","213859","213951"];
+
+    var password = prompt("من فضلك أدخل كلمة المرور:");
+    
+    // التحقق إذا كانت الكلمة موجودة في المصفوفة
+    if (validPasswords.includes(password)) {
+      document.getElementById("protectedContent").style.display = "block";
+    } else {
+      alert("كلمة المرور غير صحيحة!");
+      document.body.innerHTML = "<h2>تم رفض الوصول</h2><br><h4>ابعتلى واتساب اليوزر بتاعك 01229253356<h4> ";
+    }
+  }
+  </script>
+
+</body>
+</html>
